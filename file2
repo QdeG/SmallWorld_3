@@ -1,0 +1,70 @@
+import random
+class GamesNight:
+
+    def enter_world(self):
+        slow_text("Welcome to a game of randominzed dice rolling.\n", 0, 3)
+        slow_text("As you may input a number between 1 and 12, the output will be random. \n", 0, 3)
+        slow_text("That means, both you and the computer have as much change, or is it?. \n", 0, 3)
+        slow_text("If you crack the mathematics behind the game, succes will be on your side! \n", 0, 3)
+        points = 0
+        while points < 80:
+            player = int(input("Pick a number between 1 and 12: "))
+            player_throw = random.randint(1, player)
+            player_throw2 = 0
+            if player_throw <= 2:
+                player_throw2 += 11
+            elif player_throw > 6: 
+                player_throw2 += 1
+            else:
+                player_throw2 += 5
+
+            computer = random.randint(1,12)
+            if player_throw2 == computer:
+                print("Its a tie")
+            elif player_throw2 > computer:
+                print(f"You rolled a {player_throw2} against {computer}, and scored 10 points")
+                points += 10
+                if points > 80:
+                    print("Great job! You just beated the computer in a dice game.")
+                else:
+                     print("Go again!")
+            else:
+                print(f"You just threw {player_throw2} and lost against the computer {computer}")
+
+
+        else:
+            print("You just completed the first stage!")
+            name = input ("What's your name? ") 
+            slow_text(f"Very well {name}, now things will get a bit more difficult.\n", 0, 3)
+            slow_text("You just enterd the second arena!\n", 0, 3)
+            slow_text("Welcome to the Quiz, where you have to answer 5 out of 6 questions correct.\n", 0, 3)
+            slow_text("Remember, the following questions are almost all answered with True or False.\n", 0, 3)
+            slow_text(f"\nOkay {name}, let's get started!\n", 0, 3) 
+
+            t = ["True", "true", "T", "t"]
+            f = ["False", "false", "F", "f"]
+            questions = [
+                ("\nThe capital of iceland is Reykjavik.", t),
+                ("\nThe elephant is the biggest land animal.", t),
+                ("\n97 is a prime number.", t),
+                ("\nComplete the following sequence: 16 - 4 - 8 - 12 - 3 - 6 - ...", ["9"]),
+                ("\nThe number of inhabitants for Germany, Spain and France together exceeds the number of inhabitants in Nigeria.", f),
+                ("\nThe world largest nation without any ocean boundaries is Kazachstan.", t)
+            ]
+            correct = 0 
+            for q, a in questions:
+                print(q)
+                choice = input("> ")
+                if choice in a:
+                    correct += 1
+
+            slow_text(f"\nYou're finished, {name}. You got {correct} out of 6 correct.\n", 0, 2)
+            time.sleep(2)
+            if correct >= 5:
+                slow_text("Well done.\n", 0, 2)
+                slow_text("You complete the second and final stage!\n", 0, 2)
+                return True
+            else:
+                slow_text(f"You come {4 - correct} short. Try better next time!\n", 0, 2)
+                return False
+
